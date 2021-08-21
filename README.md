@@ -34,6 +34,8 @@
 
   git add . 添加至暂存区  
   git branch 分支管理
+  git push --set-upstream origin ‘分支名称’ 推送本地分支
+  git checkout 切换分支
 
 ## 3、 划分目录结构
 
