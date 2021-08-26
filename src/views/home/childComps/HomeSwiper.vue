@@ -3,7 +3,7 @@
     <swiper ref="mySwiper" :options="swiperOption">
       <swiper-slide v-for="item in banners" :key="item.id">
         <a :href="item.link">
-          <img :src="item.image" />
+          <img :src="item.image" @load="imgload" />
         </a>
       </swiper-slide>
 
@@ -27,6 +27,7 @@ export default {
   },
   data() {
     return {
+      showimg: false,
       swiperOption: {
         // 自动播放
         loop: true,
@@ -34,7 +35,7 @@ export default {
           // 间隔播放时间
           delay: 3000,
           //如果设置为true,当切换到最后一个slide时停止自动切换。
-          stopOnLastSlide: true,
+          stopOnLastSlide: false,
           disableOnInteraction: false
         },
         // 显示分页
@@ -55,7 +56,14 @@ export default {
       return this.$refs.mySwiper.$swiper
     }
   },
-  methods: {},
+  methods: {
+    imgload() {
+      if (!this.showimg) {
+        this.$emit('showswiperimg')
+        this.showimg = true
+      }
+    }
+  },
   mouted() {
     this.swiper.slideTo(4, 1000, false)
   }

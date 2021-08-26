@@ -11,8 +11,11 @@ export default {
   name: 'Tabcontrol',
   props: {
     titles: {
-      type: String,
-      required: true
+      type: Array,
+      // 当默认值是一个对象或者数组是 default必须是个函数
+      default() {
+        return []
+      }
     }
   },
   components: {},
@@ -30,6 +33,7 @@ export default {
   methods: {
     itemclick(index) {
       this.currentIndex = index
+      this.$emit('Goodsclick', index)
     }
   }
 }
@@ -42,6 +46,7 @@ export default {
   height: 40px;
   line-height: 40px;
   font-size: 15px;
+  background-color: #fff;
 }
 .tab-control-item {
   flex: 1;
