@@ -41,6 +41,7 @@
 * git branch 分支管理
 * git push --set-upstream origin ‘分支名称’ 推送本地分支
 * git checkout 切换分支
+* git merge 合并分支
   #### 基本步骤
   > 创建远程仓库 本地创建项目 使用 git 命令连接远程仓库
   > 保存是 1、git add . 2、git commit -m "提交信息" 3、 git push
