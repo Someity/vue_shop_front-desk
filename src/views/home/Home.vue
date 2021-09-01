@@ -21,14 +21,13 @@ import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
 import BScroll from 'components/common/bscroll/BScroll'
-import BackTop from '../../components/content/backtop/BackTop.vue'
 
 import HomeSwiper from './childComps/HomeSwiper'
 import RecommendView from './childComps/RecommendView'
 import FeatureView from './childComps/FeatureView'
 
 import { getHomeMultidata, getHomeGoods } from 'network/home'
-
+import { backTopMixin } from 'common/mixin'
 export default {
   name: 'Home',
   data() {
@@ -45,12 +44,13 @@ export default {
       },
       // 当前数据类型
       currentType: 'pop',
-      isShowBack: false,
+
       tanoffsettop: 0,
       rabshowback: false,
       scrollY: 0
     }
   },
+  mixins: [backTopMixin],
   components: {
     NavBar,
     HomeSwiper,
@@ -58,8 +58,7 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    BScroll,
-    BackTop
+    BScroll
   },
   created() {
     this.getHomeMultidata()
@@ -69,13 +68,11 @@ export default {
   },
   // 进入页面触发
   activated() {
-    console.log('activated')
     this.$refs.scroll.backtop(0, this.scrollY, 0)
     this.$refs.scroll.refresh()
   },
   // 离开页面触发
   deactivated() {
-    console.log('deactivated')
     this.scrollY = this.$refs.scroll.getScrollY()
   },
   methods: {
@@ -98,9 +95,7 @@ export default {
       this.$refs.tabcontrol1.currentIndex = index
       this.$refs.tabcontrol2.currentIndex = index
     },
-    bancktop() {
-      this.$refs.scroll.backtop(0, 0)
-    },
+
     istopshow(position) {
       this.isShowBack = -position.y > 1000
       this.rabshowback = -position.y > this.tanoffsettop

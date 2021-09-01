@@ -234,3 +234,58 @@ on：监听当前 scroll 的钩子
 * 需要重新 refresh 一下
 
 ## 三、详情页面
+
+- 新建页面时需要添加对应的路由关系，才能实现跳转
+
+* 路由需要传递参数 -布尔模式
+
+### 3.1、商品的 id 获取
+
+- 在商品 item 的小组件中通过\$router.push 的方法传递 item.iid 参数
+- 通过\$router.params 来接受这个参数即可
+
+### 3.2、导航组件
+
+- 创建子组件导入公共的 navbar 组件
+- 需要两个插槽 left 和 conter
+- left 是一张图片 添加了点击事件通过 router.back 回到上一个页面
+- conter 是四个可点击文字,通过 v-for 来生成也有点击切换颜色效果
+
+* 通过记录索引号 和绑定 class 样式来实现
+
+### 3.3 轮播图、商品信息、商户信息、评论信息、商品详情、推荐商品 等复制粘贴。
+
+### 3.3.1 当数据来源不具体，可以创建一个对象进行汇总在进行导出，最后 new 一下就好
+
+### 3.3.2 时间格式化 formdata 函数
+
+### 3.4 混入 mixins
+
+- 用于抽取复用的代码(方法、data、components 等)
+
+* 创建混入对象 minin
+* mixins 导入 ；[]
+
+### 3.5 \$nextTick 函数
+
+- 接受函数为参数
+
+### 3.6 封装组件
+
+// 将对话框挂在到 vue 上 之后全局就可以使用了 this.\$toast.show(信息数据,消失时间)  
+import Toast from './Toast'
+
+export default {  
+install(Vue) {  
+// 1、创建组件构造器  
+const toastContrustor = Vue.extend(Toast)  
+// 2、new 的方式，根据组件构造器，可以创建一个组件对象  
+const toast = new toastContrustor()  
+// 3、将组件对象手动挂在到某一个元素上  
+toast.$mount(document.createElement('div'))  
+    // 4、toast.$el 对应的就是 div  
+document.body.appendChild(toast.$el)  
+  //  挂在到vue实例中  
+    Vue.prototype.$toast = toast  
+}  
+};

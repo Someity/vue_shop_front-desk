@@ -24,17 +24,11 @@ export default {
       default: false
     }
   },
-
-  components: {},
-
-  directives: {},
-
   data() {
     return {
       scroll: null
     }
   },
-
   mounted() {
     this.scroll = new BScroll(this.$refs.scroll, {
       pullUpLoad: this.pullUpLoad,
@@ -42,9 +36,10 @@ export default {
       click: true,
       observeImage: true
     })
-    if (this.probeType == 3 || this.probeType == 2) {
+    if (this.probeType === 3 || this.probeType === 2) {
       this.scroll.on('scroll', position => {
         this.$emit('scroll', position)
+        // console.log(position)
       })
     }
 
@@ -54,10 +49,10 @@ export default {
       })
     }
   },
-
   methods: {
     backtop(x, y, time = 300) {
       //  && 逻辑与 前面为true才执行后面的
+      console.log('---')
       this.scroll && this.scroll.scrollTo(x, y, time)
     },
     finishPullUp() {
